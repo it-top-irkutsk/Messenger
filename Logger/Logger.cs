@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Windows;
 using Microsoft.Data.Sqlite;
 
 namespace Logger
@@ -20,7 +21,7 @@ namespace Logger
             }
             catch (Exception e)
             {
-                Console.WriteLine("e");
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 throw new Exception($"{e}");
             }
         }
@@ -38,7 +39,7 @@ namespace Logger
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("e");
+                    MessageBox.Show(e.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     throw new Exception($"{e}");
                 }
             }
