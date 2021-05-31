@@ -15,7 +15,7 @@ namespace Logger
             {
                 bd = new SqliteConnection("nameBD");
                 bd.Open();
-                var CreateTable = "CREATE table IF NOT EXISTS Log (id integer PRIMARY KEY AUTOINCREMENT NOT NULL,time char(50) NOT NULL,type char(20) NOT NULL,message char(100) NOT NULL)";
+                var CreateTable = "CREATE table IF NOT EXISTS Log (id integer PRIMARY KEY AUTOINCREMENT NOT NULL,time text(50) NOT NULL,type text(20) NOT NULL,message text(100) NOT NULL)";
                 SqlRequest(CreateTable);
             }
             catch (Exception e)
