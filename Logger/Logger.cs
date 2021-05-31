@@ -8,14 +8,14 @@ namespace Logger
     public class Logger
     {
         private const string nameBD = "Data Source=Log.sqlite";
-        private SqliteConnection bd;
+        private SqliteConnection _db;
 
         public Logger()
         {
             try
             {
-                bd = new SqliteConnection("nameBD");
-                bd.Open();
+                _db = new SqliteConnection("nameBD");
+                _db.Open();
                 var CreateTable = "CREATE table IF NOT EXISTS Log (id integer PRIMARY KEY AUTOINCREMENT NOT NULL,time text(50) NOT NULL,type text(20) NOT NULL,message text(100) NOT NULL)";
                 SqlRequest(CreateTable);
             }
@@ -26,14 +26,14 @@ namespace Logger
             }
         }
 
-        private void SqlRequest(string message)
+        private void SqlRequest(string sql)
         {
             using (SqliteCommand command = new SqliteCommand())
             {
                 try
                 {
-                    command.Connection = bd;
-                    command.CommandText = "message";
+                    command.Connection = _db;
+                    command.CommandText = sql;
                     command.CommandType = CommandType.Text;
                     command.ExecuteNonQuery();
                 }
