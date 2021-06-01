@@ -8,7 +8,7 @@ namespace Message_Types
     }
     public class Msg
     {
-        public Enum Type;
+        public TypesMsg Type;
         public string Name;
         public DateTime Date;
         public string Chat;
