@@ -12,6 +12,7 @@ namespace Message_Types
         public string SenderName;
         public DateTime Date;
         public string NameChat;
+        public string Message;
     }
     
 }
