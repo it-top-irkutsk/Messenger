@@ -1,26 +1,27 @@
 # Class Logger to SQLite
 Класс работает с БД SQLite и записывает данные формата {Дата}{Тип сообщения}{Сообщение} в файл Log.sqlite
 
-
 ## Перечисления типов сообщения реализованных в классе
-LogType.Info (тип Информационный)
-
-LogType.Success (тип Успешный)
-
-LogType.Warning (тип Предупреждение)
-
-LogType.Error (тип Ошибка)
-
+```LogType.Info``` Информационный  
+```LogType.Success``` Успешный  
+```LogType.Warning``` Предупреждение  
+```LogType.Error``` Ошибка
 
 ## Функции класса Logger
-CustomLog (Принимает String (Тип собщения), String Сообщение) (Записывает сообщение в SQLite)
+CustomLog ```функция записи кастомного лога```  
+**Пример**
+```void CustomLog(string type,string message)  type прием string название типа сообщения, message это сообщение```
 
-TypeLog (Принимает LogType (Тип собщения), String Сообщение) (Записывает сообщение в SQLite)
+TypeLog ```функция записи типизированного лога```  
+**Пример**
+```void TypeLog(LogType type,string message) type прием типа из перечисления LogType, message это сообщение```
 
-Info (Принимает String Сообщение) (Записывает информационные сообщение в SQLite)
-
-Success (Принимает String Сообщение) (Записывает Успешные сообщение в SQLite)
-
-Warning (Принимает String Сообщение) (Записывает Предупреждение в SQLite)
-
-Error (Принимает String Сообщение) (Записывает Ошибку в SQLite)
+Info ```запись информации```  
+Success ```запись успеха```  
+Warning ```запись предупреждуния```  
+Error ```запись ошибки```  
+**Пример**  
+```void Info(string message) message сообщение, информационного типа записывает в БД```  
+```void Success(string message) message сообщение, успешного типа записывает в БД```  
+```void Warning(string message) message сообщение, предупредительного типа записывает в БД```  
+```void Error(string message) message сообщение, ошибочного типа записывает в БД```
