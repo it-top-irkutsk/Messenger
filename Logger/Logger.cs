@@ -22,7 +22,6 @@ namespace Logger
             catch (Exception e)
             {
                 string exception = "Во время подключения к Log DB, возникла ошибка SQLite.";
-                MessageBox.Show(exception, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 throw new Exception($"{exception}");
             }
         }
@@ -41,7 +40,6 @@ namespace Logger
                 catch (Exception e)
                 {
                     string exception = "Во время записи Log, возникла ошибка SQLite.";
-                    MessageBox.Show(exception, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     throw new Exception($"{exception}");
                 }
             }
