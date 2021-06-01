@@ -2,16 +2,16 @@
 
 namespace Message_Types
 {
-    enum TypesMsg
+    public enum TypesMsg
     {
         Connection,Text
     }
     public class Msg
     {
         public TypesMsg Type;
-        public string Name;
+        public string SenderName;
         public DateTime Date;
-        public string Chat;
+        public string NameChat;
     }
     
 }
