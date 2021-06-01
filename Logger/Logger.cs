@@ -7,22 +7,23 @@ namespace Logger
 {
     public class Logger
     {
-        private const string nameBD = "Data Source=Log.sqlite";
+        private const string nameDB = "Data Source=Log.sqlite";
         private SqliteConnection _db;
 
         public Logger()
         {
             try
             {
-                _db = new SqliteConnection("nameBD");
+                _db = new SqliteConnection("nameDB");
                 _db.Open();
                 var CreateTable = "CREATE table IF NOT EXISTS Log (id integer PRIMARY KEY AUTOINCREMENT NOT NULL,time text(50) NOT NULL,type text(20) NOT NULL,message text(100) NOT NULL)";
                 SqlRequest(CreateTable);
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw new Exception($"{e}");
+                string exception = "Во время подключения к Log DB, возникла ошибка SQLite.";
+                MessageBox.Show(exception, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw new Exception($"{exception}");
             }
         }
 
@@ -39,8 +40,9 @@ namespace Logger
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    throw new Exception($"{e}");
+                    string exception = "Во время записи Log, возникла ошибка SQLite.";
+                    MessageBox.Show(exception, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    throw new Exception($"{exception}");
                 }
             }
         }
