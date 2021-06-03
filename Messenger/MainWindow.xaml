@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Messenger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Messenger" Height="450" Width="800">
 
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="2"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" LastChildFill="False">
+            <ListBox DockPanel.Dock="Top" Width="Auto" SelectionMode="Single">
+                <TextBlock Text="Пользователи" />
+                <ListBoxItem Content="Пользователь 1" Background="LightGray"></ListBoxItem>
+                <ListBoxItem Content="Пользователь 2"></ListBoxItem>
+                <ListBoxItem Content="Пользователь 3" Background="LightGray"></ListBoxItem>
+                <ListBoxItem Content="Пользователь 4"></ListBoxItem>
+                <ListBoxItem Content="Пользователь 5" Background="LightGray"></ListBoxItem>
+            </ListBox>
+            <ListBox DockPanel.Dock="Top" Width="Auto" SelectionMode="Single">
+                <TextBlock Text="Чаты" />
+                <ListBoxItem Content="Общий чат" Background="LightGray"></ListBoxItem>
+                <ListBoxItem Content="Чат 1"></ListBoxItem>
+                <ListBoxItem Content="Чат 2" Background="LightGray"></ListBoxItem>
+                <ListBoxItem Content="Чат 3"></ListBoxItem>
+                <ListBoxItem Content="Чат 4" Background="LightGray"></ListBoxItem>
+            </ListBox>
+        </DockPanel>
+        <GridSplitter Grid.Column="1" ShowsPreview="False" Width="2" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+        </GridSplitter>
+        <DockPanel Grid.Column="2" LastChildFill="True">
+            <TextBox DockPanel.Dock="Bottom" Text="TextBox" TextWrapping="Wrap" Width="Auto"/>
+            <TextBlock DockPanel.Dock="Top" Text="TextBlock" TextWrapping="Wrap" Width="Auto"/>
+        </DockPanel>
     </Grid>
 </Window>
