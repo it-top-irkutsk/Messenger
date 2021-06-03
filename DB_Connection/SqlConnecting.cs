@@ -16,35 +16,38 @@ namespace DB_Connection
 {
     public class SqlConnecting : ISqlConnecting
     {
-        private string _connectionString, _dataSource, _password, _catalog, _userId;
+        private string ConnectionString { get; set; }
+        private string DataSource { get; set; }
+        private string Password { get; set; }
+        private string Catalog { get; set; }
+        private string UserId { get; set; }
         private SqlConnection _cnn;
         private static bool _isConnected;
-        private ISqlConnecting _sqlConnectingImplementation;
 
         public void SetDataSource(string dataSource)
         {
-            _dataSource = dataSource;
+            DataSource = dataSource;
         }
         
         public void SetPassword(string password)
         {
-            _password = password;
+            Password = password;
         }
         
         public void SetCatalog(string catalog)
         {
-            _catalog = catalog;
+            Catalog = catalog;
         }
         
         public void SetUserId(string userId)
         {
-            _userId = userId;
+            UserId = userId;
         }
         
         public void ConnectToDb()
         {
-            _connectionString = $"Data Source={_dataSource};Initial Catalog={_catalog};User ID={_userId};Password={_password}";
-            _cnn = new SqlConnection(_connectionString);
+            ConnectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
+            _cnn = new SqlConnection(ConnectionString);
             _cnn.Open();
             _isConnected = true;
         }
@@ -52,8 +55,8 @@ namespace DB_Connection
         public void DisconnectFromDb()
         {
             if (!_isConnected) return;
-            _connectionString = $"Data Source={_dataSource};Initial Catalog={_catalog};User ID={_userId};Password={_password}";
-            _cnn = new SqlConnection(_connectionString);
+            ConnectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
+            _cnn = new SqlConnection(ConnectionString);
             _cnn.Close();
             _isConnected = false;
         }
@@ -75,8 +78,7 @@ namespace DB_Connection
         
         public void GetData( int id)
         {
-            if (!_isConnected) return; 
-            
+            if (!_isConnected) return;
         }
     }
 }
