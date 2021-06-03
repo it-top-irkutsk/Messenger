@@ -76,7 +76,6 @@ namespace DB_Connection
         public void GetData( int id)
         {
             if (!_isConnected) return; 
-            
         }
     }
 }
