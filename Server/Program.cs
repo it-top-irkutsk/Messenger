@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Net;
 
 namespace Server
 {
@@ -6,7 +8,20 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ServerObject server = new();
+            try
+            {
+                server = new ServerObject();
+                //Console.WriteLine("sdsd");
+                Task listenTask = new Task(server.Listen);
+                listenTask.Start(); //старт потока прослушивания
+                listenTask.Wait();
+            }
+            catch (Exception ex)
+            {
+                server.Disconnect();
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
