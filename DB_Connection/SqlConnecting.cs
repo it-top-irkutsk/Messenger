@@ -14,71 +14,59 @@ using System.Data.SqlClient;
 
 namespace DB_Connection
 {
-    public class SqlConnecting : ISqlConnecting
+    public class SqlConnecting
     {
-        private string ConnectionString { get; set; }
-        private string DataSource { get; set; }
-        private string Password { get; set; }
-        private string Catalog { get; set; }
-        private string UserId { get; set; }
         private SqlConnection _cnn;
-        private static bool _isConnected;
+        private string _connectionString;
 
-        public void SetDataSource(string dataSource)
+        private string DataSource { get; init; }
+        private string Password { get; init; }
+        private string Catalog { get; init; }
+        private string UserId { get; init; }
+        public bool IsConnected { get; private set; }
+        public SqlConnecting(string dataSource, string catalog, string password, string userId)
         {
+            IsConnected = false;
             DataSource = dataSource;
-        }
-        
-        public void SetPassword(string password)
-        {
             Password = password;
-        }
-        
-        public void SetCatalog(string catalog)
-        {
             Catalog = catalog;
-        }
-        
-        public void SetUserId(string userId)
-        {
             UserId = userId;
         }
-        
-        public void ConnectToDb()
+        public void ConnectTo()
         {
-            ConnectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
-            _cnn = new SqlConnection(ConnectionString);
+            _connectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
+            _cnn = new SqlConnection(_connectionString);
             _cnn.Open();
-            _isConnected = true;
+            IsConnected = true;
         }
         
-        public void DisconnectFromDb()
+        public void DisconnectFrom()
         {
-            if (!_isConnected) return;
-            ConnectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
-            _cnn = new SqlConnection(ConnectionString);
+            if (!IsConnected) return;
+            _connectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
+            _cnn = new SqlConnection(_connectionString);
             _cnn.Close();
-            _isConnected = false;
+            IsConnected = false;
         }
 
-        public void ConnectToTable()
+        public string GetDataFrom(string name)
         {
-            throw new NotImplementedException();
-        }
+            if (!IsConnected) throw new Exception();
+            SqlCommand command;
+            SqlDataReader dataReader;
+            String sqlString, output = "";
 
-        public void DisconnectFromTable()
-        {
-            throw new NotImplementedException();
-        }
+            sqlString = $"SELECT * FROM {name};";
 
-        public void GetTables()
-        {
-            if (!_isConnected) return;
-        }
-        
-        public void GetData( int id)
-        {
-            if (!_isConnected) return;
+            command = new SqlCommand(sqlString, _cnn);
+
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
+            {
+                output = output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1) + "\n";
+            }
+
+            return output;
         }
     }
 }
