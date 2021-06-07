@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Net;
+using System.Threading;
+
 
 namespace Server
 {
     class Program
     {
+        static Server server; // сервер
+        static Thread listenThread; // потока для прослушивания
+        
         static void Main(string[] args)
         {
-            ServerObject server = new();
             try
             {
-                server = new ServerObject();
-                //Console.WriteLine("sdsd");
-                Task listenTask = new Task(server.Listen);
-                listenTask.Start(); //старт потока прослушивания
-                listenTask.Wait();
+                server = new Server();
+                listenThread = new Thread(new ThreadStart(server.Listen));
+                listenThread.Start(); //старт потока
             }
             catch (Exception ex)
             {
