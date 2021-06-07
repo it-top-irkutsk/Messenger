@@ -28,7 +28,13 @@
             <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
                 <TextBlock Text="Идентифицируйте себя!" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="20,20,0,0"/>
                 <TextBlock Text="Ваш логин" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
-                <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" Margin="0,5,0,0" Text="Логин" TextWrapping="NoWrap" Width="309"/>
+                <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Margin="0,5,0,0" Text="Логин" TextWrapping="NoWrap" Width="309"/>
+                <TextBlock Text="Пароль" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
+                <PasswordBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" Margin="0,5,0,0" Password="" Width="309"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Войти" Margin="10,10,10,10" FontSize="22" />
+                    <Button Content="Регистрация" Margin="10,10,10,10" FontSize="22"/>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Border>
