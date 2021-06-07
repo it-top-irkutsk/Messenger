@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Messenger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Войти в чат" Height="450" Width="800"
+        WindowStyle="None" 
+        ResizeMode="NoResize" 
+        Background="Transparent" 
+        AllowsTransparency="True">
+    <Border Background="#272537" CornerRadius="10" MouseLeftButtonDown="Border_MouseLeftButtonDown" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Rectangle StrokeThickness ="1" Grid.Row="1" Grid.Column="1" Fill="#FF1C163C" RadiusX="50" RadiusY="50" />
+            <TextBlock Text="Чат Болтанка приветствует вас!" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="22" Margin="0,0,0,0"/>
 
-    </Grid>
+            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
+                <TextBlock Text="Идентифицируйте себя!" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="20,20,0,0"/>
+                <TextBlock Text="Ваш логин" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
+                <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" Margin="0,5,0,0" Text="Логин" TextWrapping="NoWrap" Width="309"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+
 </Window>
