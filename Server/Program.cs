@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Net;
+using DB_Connection;
 
 namespace Server
 {
@@ -8,6 +9,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
+            DataBase db = new();
             ServerObject server = new();
             try
             {
