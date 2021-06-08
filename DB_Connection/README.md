@@ -49,10 +49,10 @@ ID пользователя - "sa",
 ```GetDataFrom("demoTable1")``` 
 Вывод:
 ```
-1       data1
-2       data2
-3       data3
-4       data4
+1 - data1
+2 - data2
+3 - data3
+4 - data4
 ```
 
 ---
