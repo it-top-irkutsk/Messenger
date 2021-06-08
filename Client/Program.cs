@@ -14,6 +14,7 @@ namespace Client
         static NetworkStream stream;
         static void Main(string[] args)
         {
+            ClientObj client;
             Console.Write("Введите свое имя: ");
             userName = Console.ReadLine();
             client = new TcpClient();
