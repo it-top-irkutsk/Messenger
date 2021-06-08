@@ -10,6 +10,7 @@
         ResizeMode="NoResize" 
         Background="Transparent" 
         AllowsTransparency="True">
+       
     <Border Background="#272537" CornerRadius="10" MouseLeftButtonDown="Border_MouseLeftButtonDown" >
         <Grid>
             <Grid.ColumnDefinitions>
@@ -39,9 +40,10 @@
                     <TextBlock Text="Пароль" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
                     <PasswordBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" Margin="0,5,0,0" Password="" Width="309"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="Войти" Margin="10,10,10,10" FontSize="22" Width="140" Background="Azure" />
+                        <Button Content="Войти" Margin="10,10,10,10" FontSize="22" Width="140" />
                         <Button Content="Регистрация" Margin="10,10,10,10" FontSize="22" Width="140"/>
                     </StackPanel>
+                    <Button Content="Выйти из программы" Margin="10,10,10,10" FontSize="22" Width="300" Click="Button_Click" />
                 </StackPanel>
             </Grid>
             
