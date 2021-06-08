@@ -23,6 +23,8 @@ namespace Messenger
         public MainWindow()
         {
             InitializeComponent();
+            //логин
+            //загрузка базы
         }
     }
 }

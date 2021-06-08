@@ -40,7 +40,8 @@ namespace Net {
                 while (true)
                 {
                     TcpClient tcpClient = tcpListener.AcceptTcpClient();
-                    ClientObject clientObject = new ClientObject(tcpClient, this);
+                    ServerObject server = new ServerObject();
+                    ClientObject clientObject = new ClientObject(tcpClient, server);
                     Task clientTask = new(clientObject.Process);
                     clientTask.Start();
                 }
