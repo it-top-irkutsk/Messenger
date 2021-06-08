@@ -61,7 +61,7 @@ namespace DB_Connection
             dataReader = command.ExecuteReader();
             while (dataReader.Read())
             {
-                output = output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1) + "\n";
+                output = output + dataReader.GetValue(0) + "\n";
             }
 
             return output;
