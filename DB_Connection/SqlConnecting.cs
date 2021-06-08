@@ -17,9 +17,9 @@ namespace DB_Connection
         private string _connectionString;
 
         private string DataSource { get; init; }
-        private string Password { get; init; }
         private string Catalog { get; init; }
         private string UserId { get; init; }
+        private string Password { get; init; }
         public bool IsConnected { get; private set; }
         public SqlConnecting(string dataSource, string catalog, string userId, string password)
         {

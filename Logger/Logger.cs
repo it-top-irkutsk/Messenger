@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows;
 using Microsoft.Data.Sqlite;
+using SqlConnection;
 
 namespace Logger
 {
