@@ -10,7 +10,7 @@
 <Border HorizontalAlignment="Center" CornerRadius="10" BorderThickness="1" Background="Black" .....>
 <Button Style="{StaticResource Super_button}" FontSize="22" ....." />
 ### Стиль для кнопки:
-```sh
+```xml
 <Window.Resources>
         <Style x:Key="Super_button" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
