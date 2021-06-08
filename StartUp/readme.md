@@ -6,10 +6,9 @@
 Цвет кнопок - #272537
 ```
 ## Стили кнопок (Основные моменты. Многоточия заменить на необходимые параметры):
-```sh
+```xml
 <Border HorizontalAlignment="Center" CornerRadius="10" BorderThickness="1" Background="Black" .....>
 <Button Style="{StaticResource Super_button}" FontSize="22" ....." />
-```
 ### Стиль для кнопки:
 ```sh
 <Window.Resources>
