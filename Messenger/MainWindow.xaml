@@ -10,7 +10,38 @@
         ResizeMode="NoResize" 
         Background="Transparent" 
         AllowsTransparency="True">
-       
+    <Window.Resources>
+        <Style x:Key="Super_button" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Background" Value="#272537"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="PreviewMouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.100" To="2,2,0,0"/> 
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="PreviewMouseUp">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.100" To="0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>  
     <Border Background="#272537" CornerRadius="10" MouseLeftButtonDown="Border_MouseLeftButtonDown" >
         <Grid>
             <Grid.ColumnDefinitions>
@@ -35,16 +66,55 @@
                     <TextBlock Text="Идентифицируйте себя!" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="20,20,0,0"/>
                     <TextBlock Text="Ваш логин" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
 
-                    <TextBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Margin="0,5,0,0" Text="Логин" TextWrapping="NoWrap" Width="309"/>
+                    <TextBox x:Name="Login_Box" Grid.Column="1" Background="#272537" Foreground="White" Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Margin="0,5,0,0" Text="Логин" TextWrapping="NoWrap" Width="309" GotFocus="TextBox_GotFocus"/>
 
-                    <TextBlock Text="Пароль" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
-                    <PasswordBox Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" Margin="0,5,0,0" Password="" Width="309"/>
+                    <TextBlock Text="Пароль"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
+                    <PasswordBox Grid.Column="1" Background="#272537" Foreground="White" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" Margin="0,5,0,0" Password="" Width="309"/>
+                    
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="Войти" Margin="10,10,10,10" FontSize="22" Width="140" />
-                        <Button Content="Регистрация" Margin="10,10,10,10" FontSize="22" Width="140"/>
+                        <Border Grid.Row="0" Width="140" HorizontalAlignment="Center" Margin="10,10,10,10" CornerRadius="10" BorderThickness="1" Background="Black">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderBrush" Value="#FF20489E"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="White"/>
+                                        </Trigger>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Button Content="Войти" Style="{StaticResource Super_button}" FontSize="22" Width="140" />
+                        </Border>
+                        <Border Grid.Row="0" Width="140" HorizontalAlignment="Center" Margin="10,10,10,10" CornerRadius="10" BorderThickness="1" Background="Black">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderBrush" Value="#FF20489E"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Button Content="Регистрация" Style="{StaticResource Super_button}" FontSize="22" Width="140"/>
+                        </Border>
                     </StackPanel>
-                    <Button Content="Выйти из программы" Margin="10,10,10,10" FontSize="22" Width="300" Click="Button_Click" />
+                    <Border Grid.Row="0" Width="300" HorizontalAlignment="Center" CornerRadius="10" BorderThickness="1" Background="Black">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="BorderBrush" Value="#FF20489E"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" Value="White"/>
+                                    </Trigger>
+                               </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Button Content="Выйти из программы" Style="{StaticResource Super_button}" FontSize="22" Width="300" Click="Button_Click" />
+                    </Border>
                 </StackPanel>
+                    
             </Grid>
             
            

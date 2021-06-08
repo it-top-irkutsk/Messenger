@@ -34,5 +34,13 @@ namespace Messenger
         {
             this.Close();
         }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (Login_Box.Text=="Логин")
+            {
+                Login_Box.Text = "";
+            }
+        }
     }
 }
