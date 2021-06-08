@@ -40,7 +40,6 @@ namespace Messenger
             if (Login_Box.Text=="Логин")
             {
                 Login_Box.Text = "";
-            }
-        }
+            }         }
     }
 }

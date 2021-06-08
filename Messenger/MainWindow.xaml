@@ -25,7 +25,7 @@
                             <EventTrigger RoutedEvent="PreviewMouseDown">
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.100" To="2,2,0,0"/> 
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.100" To="2,2,0,0"/>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </EventTrigger>
@@ -41,7 +41,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </Window.Resources>  
+    </Window.Resources>
     <Border Background="#272537" CornerRadius="10" MouseLeftButtonDown="Border_MouseLeftButtonDown" >
         <Grid>
             <Grid.ColumnDefinitions>
@@ -67,10 +67,9 @@
                     <TextBlock Text="Ваш логин" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
 
                     <TextBox x:Name="Login_Box" Grid.Column="1" Background="#272537" Foreground="White" Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Margin="0,5,0,0" Text="Логин" TextWrapping="NoWrap" Width="309" GotFocus="TextBox_GotFocus"/>
-
                     <TextBlock Text="Пароль"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
                     <PasswordBox Grid.Column="1" Background="#272537" Foreground="White" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" Margin="0,5,0,0" Password="" Width="309"/>
-                    
+
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Border Grid.Row="0" Width="140" HorizontalAlignment="Center" Margin="10,10,10,10" CornerRadius="10" BorderThickness="1" Background="Black">
                             <Border.Style>
@@ -108,16 +107,16 @@
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="BorderBrush" Value="White"/>
                                     </Trigger>
-                               </Style.Triggers>
+                                </Style.Triggers>
                             </Style>
                         </Border.Style>
                         <Button Content="Выйти из программы" Style="{StaticResource Super_button}" FontSize="22" Width="300" Click="Button_Click" />
                     </Border>
                 </StackPanel>
-                    
+
             </Grid>
-            
-           
+
+
         </Grid>
     </Border>
 
