@@ -8,30 +8,29 @@ namespace Message_Types
         Connection,
         Disconnection,
         Text,
-        Welcome,
-        Bye
+        CreateChat,
+        DeleteChat
     }
 
     public class Msg
     {
-        public DateTime Date { get; set; }
         public TypesMsg Type { get; set; }
-        public string NameChat { get; set; }
+        public int IdChat { get; set; }
+        public DateTime Date { get; set; }
         public string SenderName { get; set; }
         public string Message { get; set; }
 
-        public Msg()
-        {
-        }
+        public Msg() { }
 
-        public Msg(DateTime date, TypesMsg type, string nameChat, string senderName, string message)
+        public Msg(int idChat,DateTime date, TypesMsg type, string senderName, string message)
         {
             Type = type;
+            IdChat = idChat;
             Date = date;
-            NameChat = nameChat;
             SenderName = senderName;
             Message = message;
         }
         
     }
+   
 }
