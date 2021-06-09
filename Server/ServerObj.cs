@@ -14,7 +14,7 @@ namespace Server
         private List<TcpClient> clients; // все клиенты
         public ServerObj()
         {
-            server = new TcpListener(IPAddress.Any, 8888);
+            server = new(IPAddress.Any, 8888);
             clients = new();
         }
         public void Start()
@@ -36,10 +36,10 @@ namespace Server
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Disconnect();
+                Stop();
             }
         }
-        public void ClientProcess(TcpClient client)
+        private void ClientProcess(TcpClient client)
         {
             NetworkStream stream = client.GetStream();
 
@@ -53,7 +53,8 @@ namespace Server
             String mstring = System.Text.Encoding.ASCII.GetString(data, 0, data.Length);
             Console.WriteLine(mstring);
         }
-        public void Disconnect()
+
+        private void Stop()
         {
             server.Stop(); //остановка сервера
             for (int i = 0; i < clients.Count; i++)
