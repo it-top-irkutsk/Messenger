@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Message_Types\Message_Types.csproj" />
     <ProjectReference Include="..\Net\Net.csproj" />
   </ItemGroup>
 

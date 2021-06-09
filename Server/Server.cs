@@ -49,13 +49,13 @@ namespace Server
             }
         }
         
-        protected internal void BroadcastMessageToRoom(string message,int chat)
+        protected internal void BroadcastMessageToRoom(string message,int idChat)
         {
             {
                 byte[] data = Encoding.Unicode.GetBytes(message);
                 for (int i = 0; i < clients.Count; i++)
                 {
-                    if (clients[i].chat != chat)
+                    if (clients[i].idChat != idChat)
                     {
                         clients[i].Stream.Write(data, 0, data.Length); //передача данных клиентам
                     }

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
+using Message_Types;
 
 namespace Server
 {
@@ -9,14 +12,13 @@ namespace Server
     {
         protected internal string Id { get; private set; }
         protected internal NetworkStream Stream {get; private set;}
-        private string userName;
-        public int chat;
+        public int idChat;
         private TcpClient client;
         private Server server;
 
         public Client(TcpClient tcpClient, Server netServer)
         {
-            chat = '1';
+            idChat = '1';
             Id = Guid.NewGuid().ToString();
             client = tcpClient;
             server = netServer;
@@ -24,13 +26,18 @@ namespace Server
         }
         public void ProcessServer()
         {
+            bool autorization = false;
             try
             {
                 Stream = client.GetStream();
-                // получаем имя пользователя
-                string message = GetMessage();
-                userName = message;
-                Console.WriteLine($"{userName} : Подключился к серверу");
+                do
+                {
+                    string message = GetMessage();
+                    //TODO написать авторизацию
+                    SendMessage(message);
+                } while (autorization);
+                
+
                 Thread receiveThread = new Thread(new ThreadStart(() => ServerChat()));
                 receiveThread.Start(); //старт потока
                 while (true)
@@ -54,9 +61,31 @@ namespace Server
         {
             while (true)
             {
-                string text = GetMessage();
-                server.BroadcastMessageToRoom(text,chat);
+                string textJSON = GetMessage();
+                Msg message = JsonSerializer.Deserialize<Msg>(textJSON);
+                switch (message.Type)
+                {
+                    case TypesMsg.Connection: //TODO Написать проверку логина и пароля полученного от клиента
+                        idChat = message.idChat;
+                        
+                        
+                        break;
+                    case TypesMsg.Disconnection:
+                        server.RemoveConnection(Id);
+                        break;
+                    case TypesMsg.Text:
+                        server.BroadcastMessageToRoom(message.Message,idChat);
+                        break;
+                    default:
+                        break;
+                }
             }
+        }
+
+        private string Welcom(Msg message)
+        {
+            string text = $"К нам подключился пользователь : {message.SenderName}";
+            return text;
         }
         
         private string GetMessage()
@@ -78,6 +107,11 @@ namespace Server
                 Console.WriteLine(e.Message);
                 throw new Exception(e.Message);
             }
+        }
+        public  void SendMessage(string message)
+        {
+            byte[] data = Encoding.Unicode.GetBytes(message);
+            Stream.Write(data, 0, data.Length);
         }
         protected internal void Close()
         {
