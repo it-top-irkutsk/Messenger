@@ -8,6 +8,8 @@ namespace Message_Types
         Connection,
         Disconnection,
         Text,
+        CreateChat,
+        DeleteChat
     }
 
     public class Msg
@@ -15,7 +17,6 @@ namespace Message_Types
         public TypesMsg Type { get; set; }
         public int IdChat { get; set; }
         public DateTime Date { get; set; }
-        +
         public string SenderName { get; set; }
         public string Message { get; set; }
 
