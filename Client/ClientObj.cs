@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Net.Sockets;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Net
+namespace Client
 {
-    public class ClientObject
+    class ClientObj
     {
-        public int Id { get; private set; }
+       /* public int Id { get; private set; }
         public NetworkStream Stream { get; private set; }
         public string UserName { get; private set; }
         private TcpClient client;
@@ -83,6 +85,6 @@ namespace Net
                 Stream.Close();
             if (client != null)
                 client.Close();
-        }
+        }*/
     }
 }

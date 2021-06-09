@@ -8,19 +8,20 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            DataBase db = new();
-            ServerObject server = new();
+            //DataBase db = new();
+            ServerObj server;
             try
             {
-                server = new ServerObject();
+                server = new ServerObj();
+                server.Start();
                 //Console.WriteLine("sdsd");
-                Task listenTask = new Task(server.Listen);
-                listenTask.Start(); //старт потока прослушивания
-                listenTask.Wait();
+                //Task listenTask = new Task(server.Listen);
+                //listenTask.Start(); //старт потока прослушивания
+                //listenTask.Wait();
             }
             catch (Exception ex)
             {
-                server.Disconnect();
+                //server.Disconnect();
                 Console.WriteLine(ex.Message);
             }
         }

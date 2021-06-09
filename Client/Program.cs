@@ -2,36 +2,33 @@
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace Client
 {
     class Program
     {
-        static string userName;
         private const string host = "127.0.0.1";
         private const int port = 8888;
         static TcpClient client;
         static NetworkStream stream;
         static void Main(string[] args)
         {
-            ClientObj client;
-            Console.Write("Введите свое имя: ");
-            userName = Console.ReadLine();
             client = new TcpClient();
             try
             {
                 client.Connect(host, port); //подключение клиента
-                stream = client.GetStream(); // получаем поток
+                //stream = client.GetStream(); // получаем поток
 
-                string message = userName;
-                byte[] data = Encoding.Unicode.GetBytes(message);
-                stream.Write(data, 0, data.Length);
+                //string message = "aaaaaaaaaaaaaaa";
+                //byte[] data = Encoding.Unicode.GetBytes(message);
+                //stream.Write(data, 0, data.Length);
 
                 // запускаем новый поток для получения данных
-                Task receiveTask = new Task(ReceiveMessage);
+/*                Task receiveTask = new Task(ReceiveMessage);
                 receiveTask.Start();
                 Console.WriteLine("Добро пожаловать, {0}", userName);
-                SendMessage();
+                SendMessage();*/
             }
             catch (Exception ex)
             {
