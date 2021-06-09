@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using Message_Types;
+using Authorization = Message_Types.Authorization;
 
 namespace Server
 {
@@ -26,16 +27,18 @@ namespace Server
         }
         public void ProcessServer()
         {
-            bool autorization = false;
+            Authorization validation = new Authorization(false);
             try
             {
                 Stream = client.GetStream();
                 do
                 {
                     string message = GetMessage();
-                    //TODO написать авторизацию
-                    SendMessage(message);
-                } while (autorization);
+                    Authorization login = JsonSerializer.Deserialize<Authorization>(message);
+                    
+                    validation.Validation = Login(login);
+                    SendMessage(JsonSerializer.Serialize(validation));
+                } while (!validation.Validation);
                 
 
                 Thread receiveThread = new Thread(new ThreadStart(() => ServerChat()));
@@ -82,12 +85,12 @@ namespace Server
             }
         }
 
-        private string Welcom(Msg message)
+        private bool Login(Authorization Login)
         {
-            string text = $"К нам подключился пользователь : {message.SenderName}";
-            return text;
+            var login = Login.Login;
+            var pass = Login.Password; //Todo написать проверку логина и пароля
+            return true;
         }
-        
         private string GetMessage()
         {
             try
