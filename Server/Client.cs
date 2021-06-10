@@ -31,22 +31,18 @@ namespace Server
             try
             {
                 Stream = client.GetStream();
+                Authorization login;
                 do
                 {
                     string message = GetMessage();
-                    Authorization login = JsonSerializer.Deserialize<Authorization>(message);
-                    
+                    login = JsonSerializer.Deserialize<Authorization>(message);
                     validation.Validation = Login(login);
                     SendMessage(JsonSerializer.Serialize(validation));
                 } while (!validation.Validation);
-                
+                Console.WriteLine($"К серверу подключился пользователь - {login.Login}");
 
                 Thread receiveThread = new Thread(new ThreadStart(() => ServerChat()));
                 receiveThread.Start(); //старт потока
-                while (true)
-                {
-                    //server.BroadcastMessage("Message");//TODO написать отправку сообщения клиентам если это надо от именни сервера
-                }
             }
             catch(Exception e)
             {
@@ -66,18 +62,20 @@ namespace Server
             {
                 string textJSON = GetMessage();
                 Msg message = JsonSerializer.Deserialize<Msg>(textJSON);
+                string textExport;
                 switch (message.Type)
                 {
-                    case TypesMsg.Connection: //TODO Написать проверку логина и пароля полученного от клиента
-                        idChat = message.idChat;
-                        
+                    case TypesMsg.Connection:
                         
                         break;
                     case TypesMsg.Disconnection:
-                        server.RemoveConnection(Id);
+                        textExport = JsonSerializer.Serialize(message); //отправка остальным что пользователь отключился
+                        server.BroadcastMessage(textExport);
+                        server.RemoveConnection(Id); //удаление соединения с пользователем
                         break;
                     case TypesMsg.Text:
-                        server.BroadcastMessageToRoom(message.Message,idChat);
+                        textExport = JsonSerializer.Serialize(message);
+                        server.BroadcastMessage(textExport);
                         break;
                     default:
                         break;

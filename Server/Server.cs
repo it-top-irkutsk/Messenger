@@ -48,7 +48,6 @@ namespace Server
                 }
             }
         }
-        
         protected internal void BroadcastMessageToRoom(string message,int idChat)
         {
             {
