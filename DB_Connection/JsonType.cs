@@ -1,6 +1,6 @@
 namespace DB_Connection
 {
-    public class Sql
+    public class JsonType
     {
         public string DataSource { get; set; }
         public string Catalog { get; set; }
