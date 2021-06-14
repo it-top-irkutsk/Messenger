@@ -14,13 +14,7 @@ using System.Threading.Tasks;
 
 namespace DB_Connection
 {
-    public class Sql
-    {
-        public string DataSour { get; set; }
-        public string Catalog { get; set; }
-        public string UserId { get; set; }
-        public string Pass { get; set; }
-    }
+
     class SqlConnecting
     {
         private SqlConnection _cnn;
@@ -42,7 +36,7 @@ namespace DB_Connection
         public SqlConnecting()
         {
             SqlConnectingAsync();
-            DataSource = ConnectionSqlAsync.DataSour;
+            DataSource = ConnectionSqlAsync.DataSource;
             Catalog = ConnectionSqlAsync.Catalog;
             UserId = ConnectionSqlAsync.UserId;
             Password = ConnectionSqlAsync.Pass;
