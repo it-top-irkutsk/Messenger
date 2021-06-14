@@ -6,8 +6,8 @@
 ```bool IsConnected { get; private set; }``` - состояние подключения к базе
 
 ## Методы библиотеки SqlConnecting
-```SqlConnecting(string dataSource, string catalog, string userId, string password)```   
-*Конструктор*, принимающий значения для подключения к базе данных
+```SqlConnecting()```   
+*Конструктор*, берующий значения для подключения к базе данных из config.json
 
 **dataSource** -  имя сервера на котором находится база данных  
 **catalog** - имя базы данных к которую необходимо подключится   
@@ -15,11 +15,19 @@
 **password** - пароль для подключения к базе данных  
 
 ***Пример***        
-```SqlConnecting("WIN-50GP30FGO75", "Demodb", "sa", "demo123")```      
+```SqlConnecting()```   
+При значениях (в json):     
+{   
+"DataSour" : "WIN-50GP30FGO75",  
+"Catalog" : "Demodb",   
+"UserId" : "sa",    
+"Pass" : "demo123"  
+}   
+    
 Произойдет присвоения значений:     
 Имя сервера - "WIN-50GP30FGO75",    
 Имя базы данных - "Demodb",     
-ID пользователя - "sa", 
+ID пользователя - "sa",     
 Пароль - "demo123"  
 
 ---
@@ -91,7 +99,7 @@ id      dataname
 **id** - id строки на которой будут изменения           
 
 ***Пример***      
-```UpdateDataIn("demoTable1", "datanme='"+"data5"+"'", "5")```  
+```UpdateDataIn("demoTable1", "dataname='"+"data5"+"'", "5")```  
 Изменит значение data6 с id 5, на data5 (там где id 5)  
 Итог - таблице приобритет подобный вид:
 ```

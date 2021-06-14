@@ -8,9 +8,19 @@
 
 using System;
 using System.Data.SqlClient;
+using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace DB_Connection
 {
+    class Sql
+    {
+        public string DataSour { get; set; }
+        public string Catalog { get; set; }
+        public string UserId { get; set; }
+        public string Pass { get; set; }
+    }
     public class SqlConnecting
     {
         private SqlConnection _cnn;
@@ -20,16 +30,26 @@ namespace DB_Connection
         private string Catalog { get; init; }
         private string UserId { get; init; }
         private string Password { get; init; }
+        
+        private Sql ConnectionSqlAsync { get; set; }
         public bool IsConnected { get; private set; }
-        public SqlConnecting(string dataSource, string catalog, string userId, string password)
+
+        private async Task SqlConnectingAsync()
         {
-            IsConnected = false;
-            DataSource = dataSource;
-            Catalog = catalog;
-            UserId = userId;
-            Password = password;
+            await using FileStream fs = new FileStream("config.json", FileMode.OpenOrCreate);
+            ConnectionSqlAsync = await JsonSerializer.DeserializeAsync<Sql>(fs);
+            Console.WriteLine(ConnectionSqlAsync.DataSour);
         }
-        public void ConnectTo()
+        public SqlConnecting()
+        {
+            SqlConnectingAsync();
+            DataSource = ConnectionSqlAsync.DataSour;
+            Catalog = ConnectionSqlAsync.Catalog;
+            UserId = ConnectionSqlAsync.UserId;
+            Password = ConnectionSqlAsync.Pass;
+        }
+
+        public void Connect()
         {
             if (IsConnected) throw new Exception();
             _connectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
@@ -38,7 +58,7 @@ namespace DB_Connection
             IsConnected = true;
         }
         
-        public void DisconnectFrom()
+        public void Disconnect()
         {
             if (!IsConnected) throw new Exception();
             _connectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
@@ -47,7 +67,7 @@ namespace DB_Connection
             IsConnected = false;
         }
 
-        public string GetDataFrom(string tableName)
+        public string GetData(string tableName)
         {
             if (!IsConnected) throw new Exception();
             SqlCommand command;
@@ -67,9 +87,9 @@ namespace DB_Connection
             return output;
         }
 
-        public void AddDataTo(string tableName, string columnsNames, string data)
+        public void AddData(string tableName, string columnsNames, string data)
         {
-            if (!IsConnected) throw new Exception();
+            if (!IsConnected) return;
             SqlCommand command;
             SqlDataAdapter adapter = new SqlDataAdapter();
             String sqlString = "";
@@ -84,7 +104,7 @@ namespace DB_Connection
             command.Dispose();
         }
 
-        public void UpdateDataIn(string tableName, string updatingData, string id)
+        public void UpdateData(string tableName, string updatingData, string id)
         {
             if (!IsConnected) throw new Exception();
             SqlCommand command;
@@ -101,7 +121,7 @@ namespace DB_Connection
             command.Dispose();
         }
         
-        public void DeleteDataFrom(string tableName, string id)
+        public void DeleteData(string tableName, string id)
         {
             if (!IsConnected) throw new Exception();
             SqlCommand command;
