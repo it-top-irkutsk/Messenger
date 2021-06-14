@@ -7,6 +7,6 @@ namespace DataModel
         public int User_id { get; set; }
         public string UserName { get; set; }
         public TypeRole RolesOfUser { get; set; }
-        public string User_Status { get; set; }
+        public TypeStatus User_Status { get; set; }
     }
 }
