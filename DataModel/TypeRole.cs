@@ -1,6 +1,6 @@
 ﻿namespace DataModel
 {
-    public enum Roles_of_user
+    public enum TypeRole
     {
         Admin, User
     }
