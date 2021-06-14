@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Message_Types\Message_Types.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.25" />
+  </ItemGroup>
+
 </Project>
