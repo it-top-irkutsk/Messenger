@@ -38,7 +38,6 @@ namespace DB_Connection
         {
             await using FileStream fs = new FileStream("config.json", FileMode.OpenOrCreate);
             ConnectionSqlAsync = await JsonSerializer.DeserializeAsync<Sql>(fs);
-            Console.WriteLine(ConnectionSqlAsync.DataSour);
         }
         public SqlConnecting()
         {
