@@ -25,13 +25,13 @@ namespace DB_Connection
         private string UserId { get; init; }
         private string Password { get; init; }
         
-        private Sql ConnectionSqlAsync { get; set; }
+        private JsonType ConnectionSqlAsync { get; set; }
         public bool IsConnected { get; private set; }
 
         private async Task SqlConnectingAsync()
         {
             await using FileStream fs = new FileStream("config.json", FileMode.OpenOrCreate);
-            ConnectionSqlAsync = await JsonSerializer.DeserializeAsync<Sql>(fs);
+            ConnectionSqlAsync = await JsonSerializer.DeserializeAsync<JsonType>(fs);
         }
         public SqlConnecting()
         {
