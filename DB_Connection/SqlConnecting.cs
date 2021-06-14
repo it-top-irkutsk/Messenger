@@ -14,14 +14,14 @@ using System.Threading.Tasks;
 
 namespace DB_Connection
 {
-    class Sql
+    public class Sql
     {
         public string DataSour { get; set; }
         public string Catalog { get; set; }
         public string UserId { get; set; }
         public string Pass { get; set; }
     }
-    public class SqlConnecting
+    class SqlConnecting
     {
         private SqlConnection _cnn;
         private string _connectionString;

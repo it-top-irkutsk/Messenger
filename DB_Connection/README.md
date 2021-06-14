@@ -18,10 +18,10 @@
 ```SqlConnecting()```   
 При значениях (в json):     
 {   
-"DataSour" : "WIN-50GP30FGO75",  
-"Catalog" : "Demodb",   
-"UserId" : "sa",    
-"Pass" : "demo123"  
+    "DataSour" : "WIN-50GP30FGO75",  
+    "Catalog" : "Demodb",   
+    "UserId" : "sa",    
+    "Pass" : "demo123"  
 }   
     
 Произойдет присвоения значений:     
