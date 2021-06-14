@@ -29,8 +29,6 @@ namespace Message_Types
             Date = date;
             SenderName = senderName;
             Message = message;
-        }
-        
+        } 
     }
-   
 }
