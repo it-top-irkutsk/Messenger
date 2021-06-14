@@ -4,7 +4,7 @@ namespace DataModel
 {
     public class DataModel_Chat_archive
     {
-        public DateTime DateTime_of_message;
+        public DateTime DateTime_of_message ;
         public string Username;
         public string Chat_Name;
         public bool Chat_Status;
