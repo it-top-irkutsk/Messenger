@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 
 namespace DB_Connection
 {
-
     class SqlConnecting
     {
         private SqlConnection _cnn;
