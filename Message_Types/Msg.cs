@@ -3,15 +3,6 @@ using System.Text.Json;
 
 namespace Message_Types
 {
-    public enum TypesMsg
-    {
-        Connection,
-        Disconnection,
-        Text,
-        CreateChat,
-        DeleteChat
-    }
-
     public class Msg
     {
         public TypesMsg Type { get; set; }

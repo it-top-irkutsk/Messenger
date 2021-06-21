@@ -1,10 +1,16 @@
 ﻿##Типы 
-Connection/Disconnection используются для открытия / закрытия сокета на сервере. 
-
-Welcome/Bye используются для приветсвия / прощания.
-
-Text используется для передачи сообщения. 
+>Класс Msg  
+> 
+> Connection/Disconnection подключение / отключение от чата.
+>
+> CreateChat/DeleteChat используются для создания / удаления чата на сервере.
+>
+> Text используется для передачи сообщения. 
  
+>Класс Authorization
+> используется для отправки логина, пароля, подтверждения входа.
+> 
+>НЕ ИМЕЕТ ТИПОВ 
 ### Пример json
 Text
 ```json
@@ -21,7 +27,7 @@ Connection
 "Type":"Connection", 
 "NameChat":"Chat 10", 
 "SenderName":"Вася", 
-"Message":"Запуск метода для открытия сокета"
+"Message":" "
 }
 ```
 Disconnection
@@ -30,24 +36,26 @@ Disconnection
 "Type":"Disconnection", 
 "NameChat":"Chat 11", 
 "SenderName":"Коля", 
-"Message":"Запуск метода для закрытия сокета"
+"Message":" "
 }
 ```
-Welcome
+CreateChat
 ```json
-{ "Date": "18.10.2050 12:54:22", 
-"Type":"Welcome", 
-"NameChat":"Chat 11", 
-"SenderName":"Коля", 
-"Message":"Добро пожаловать Коля" // Любое приветствие //
+{
+  "Date": "18.10.2050 12:54:22",
+  "Type":"CreateChat",
+  "NameChat":"Chat 11",
+  "SenderName":"Коля",
+  "Message":" "
 }
 ```
-Bye
+DeleteChat
 ```json
-{ "Date": "18.10.2050 12:54:22", 
-"Type":"Bye", 
-"NameChat":"Chat 11", 
-"SenderName":"Коля", 
-"Message":"Досвидания Коля" // Любое прощание //
+{
+  "Date": "18.10.2050 12:54:22",
+  "Type":"DeleteChat",
+  "NameChat":"Chat 11",
+  "SenderName":"Коля",
+  "Message":" "
 }
 ```
