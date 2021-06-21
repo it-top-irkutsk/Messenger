@@ -5,8 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Messenger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="600" Width="800" WindowStyle="None">
+    <Window.Resources>
 
+        <Style x:Key="Super_button" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Background" Value="#272537"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="PreviewMouseDown">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.100" To="2,2,0,0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="PreviewMouseUp">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetProperty="Margin" Duration="0:0:0.100" To="0"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+       
+       <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="270"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" LastChildFill="False">
+            <ListBox DockPanel.Dock="Top" Width="Auto" SelectionMode="Single">
+               
+                <ListBoxItem Content="Пользователь 1" Height="64" Background="LightGray"></ListBoxItem>
+                <ListBoxItem Content="Пользователь 2" Height="64" />
+                <ListBoxItem Content="Пользователь 3" Height="64" Background="LightGray"></ListBoxItem>
+                <ListBoxItem Content="Пользователь 4" Height="64" />
+                <ListBoxItem Content="Пользователь 5" Height="64" Background="LightGray"></ListBoxItem>
+
+                <ListBoxItem Content="Общий чат" Height="64" Background="LightGray"></ListBoxItem>
+                <ListBoxItem Content="Чат 1" Height="64"></ListBoxItem>
+                <ListBoxItem Content="Чат 2" Height="64" Background="LightGray"></ListBoxItem>
+                <ListBoxItem Content="Чат 3" Height="64"></ListBoxItem>
+                <ListBoxItem Content="Чат 4" Height="64" Background="LightGray"></ListBoxItem>
+            </ListBox>
+
+        </DockPanel>
+        <DockPanel Grid.Column="2" LastChildFill="True">
+            <ListBoxItem Height="54" DockPanel.Dock="Top" Content="Чат такой-то"/>
+            <TextBox DockPanel.Dock="Bottom" Text="TextBox" TextWrapping="Wrap" Width="Auto" Height="111"/>
+            <TextBlock DockPanel.Dock="Top" Text="TextBlock" TextWrapping="Wrap" Width="Auto"/>
+        
+        </DockPanel>
     </Grid>
+
+    
+
 </Window>
