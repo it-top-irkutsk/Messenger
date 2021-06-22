@@ -77,9 +77,10 @@ data4
 **data** - что должно быть помещенное в таблицу                                     
 
 ***Пример***      
-```AddDataTo("demoTable1", "id, dataname", "5, '" + "data6" + "' ")```  
+```AddDataTo("demoTable1", "id, dataname", "5,data6")```  
 Добавит значение data6 с id 5
 Итог - таблице приобритет подобный вид:
+
 ```
 id      dataname
 1       data1
