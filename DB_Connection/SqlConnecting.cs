@@ -116,7 +116,7 @@ namespace DB_Connection
             return output;
         }
         
-        public void AddData(string tableName, string columnsNames, dynamic data)
+        public void AddData(string tableName, string columnsNames, string data)
         {
             if (!IsConnected) return;
             MySqlCommand command;
