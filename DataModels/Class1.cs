@@ -1,6 +1,2 @@
 ﻿using System;
-
-namespace DataModels
-{
-    
-}
+namespace DataModels {}

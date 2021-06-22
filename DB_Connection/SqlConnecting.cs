@@ -30,8 +30,7 @@ namespace DB_Connection
         private string Password { get; init; }
         
         public bool IsConnected { get; private set; }
-        
-        
+
         public MySqlConnecting()
         {
             // SqlConnectingAsync();
@@ -99,7 +98,6 @@ namespace DB_Connection
                         {
                             dataReader.GetValue(0), 
                             dataReader.GetValue(1)
-                            
                         });
                         break;
                     case "tbl_chats":
