@@ -1,6 +1,6 @@
 {
-  "DataSour" : "a",
-  "Catalog" : "b",
-  "UserId" : "c",
-  "Pass" : "d"
+  "DataSource" : "mysql60.hostland.ru",
+  "Catalog" : "host1323541_irkutsk5",
+  "UserId" : "host1323541_itstep",
+  "Password" : "269f43dc"
 }

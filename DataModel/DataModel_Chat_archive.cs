@@ -2,7 +2,7 @@
 
 namespace DataModel
 {
-    public class Chat_archive
+    public class ChatArchive
     {
         public int id_User { get; set; }
         public int id_Chat { get; set; }

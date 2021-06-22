@@ -99,7 +99,7 @@ id      dataname
 **id** - id строки на которой будут изменения           
 
 ***Пример***      
-```UpdateDataIn("demoTable1", "dataname='"+"data5"+"'", "5")```  
+```UpdateDataIn("demoTable1", "dataname=data5", "5")```  
 Изменит значение data6 с id 5, на data5 (там где id 5)  
 Итог - таблице приобритет подобный вид:
 ```

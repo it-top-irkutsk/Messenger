@@ -2,7 +2,7 @@
 
 namespace DataModel
 {
-    public class Authentification
+    public class Users
     {
         public int User_id { get; set; }
         public string UserName { get; set; }

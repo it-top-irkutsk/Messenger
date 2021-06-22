@@ -4,48 +4,50 @@
  + Inserting data to DB
  + Updating data in DB
  + Deleting data from DB   
+ TODO Filter data
 */
 
 using System;
-using System.Data.SqlClient;
+using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using DataModel;
 
 namespace DB_Connection
 {
-    class SqlConnecting
+    public class MySqlConnecting
     {
-        private SqlConnection _cnn;
+        private MySqlConnection _cnn;
         private string _connectionString;
 
-        private string DataSource { get; init; }
-        private string Catalog { get; init; }
+        private string Server { get; init; }
+        private string Database { get; init; }
+        
+        private string Port { get; init; }
         private string UserId { get; init; }
         private string Password { get; init; }
         
-        private JsonType ConnectionSqlAsync { get; set; }
         public bool IsConnected { get; private set; }
-
-        private async Task SqlConnectingAsync()
+        
+        
+        public MySqlConnecting()
         {
-            await using FileStream fs = new FileStream("config.json", FileMode.OpenOrCreate);
-            ConnectionSqlAsync = await JsonSerializer.DeserializeAsync<JsonType>(fs);
-        }
-        public SqlConnecting()
-        {
-            SqlConnectingAsync();
-            DataSource = ConnectionSqlAsync.DataSource;
-            Catalog = ConnectionSqlAsync.Catalog;
-            UserId = ConnectionSqlAsync.UserId;
-            Password = ConnectionSqlAsync.Pass;
+            // SqlConnectingAsync();
+            Server = "mysql60.hostland.ru";
+            Database = "host1323541_irkutsk5";
+            Port = "3306";
+            UserId = "host1323541_itstep";
+            Password = "269f43dc";
         }
 
         public void Connect()
         {
             if (IsConnected) throw new Exception();
-            _connectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
-            _cnn = new SqlConnection(_connectionString);
+            
+            _connectionString = $"Server={Server};Database={Database};Uid={UserId};Pwd={Password}";
+            _cnn = new MySqlConnection (_connectionString);
             _cnn.Open();
             IsConnected = true;
         }
@@ -53,44 +55,79 @@ namespace DB_Connection
         public void Disconnect()
         {
             if (!IsConnected) throw new Exception();
-            _connectionString = $"Data Source={DataSource};Initial Catalog={Catalog};User ID={UserId};Password={Password}";
-            _cnn = new SqlConnection(_connectionString);
+            _cnn = new MySqlConnection (_connectionString);
             _cnn.Close();
             IsConnected = false;
         }
 
-        public string GetData(string tableName)
+        public List<dynamic> GetData(string tableName)
         {
+            /*
+             * tbl_users
+             * tbl_chat_archive
+             * tbl_users_in_chat
+             * tbl_chats
+             */
             if (!IsConnected) throw new Exception();
-            SqlCommand command;
-            SqlDataReader dataReader;
-            String sqlString, output = "";
+            MySqlCommand command;
+            MySqlDataReader dataReader;
+            var sqlString = "";
+
+            var output = new List<dynamic>() {};
 
             sqlString = $"SELECT * FROM {tableName};";
-
-            command = new SqlCommand(sqlString, _cnn);
-
+            
+            command = new MySqlCommand(sqlString, _cnn);
             dataReader = command.ExecuteReader();
             while (dataReader.Read())
             {
-                output = output + dataReader.GetValue(0) + "\n";
+                switch (tableName)
+                {
+                    case "tbl_users":
+                    case "tbl_chat_archive":
+                       
+                            output.Add(new dynamic[]
+                            {
+                                dataReader.GetValue(0), 
+                                dataReader.GetValue(1), 
+                                dataReader.GetValue(2),
+                                dataReader.GetValue(3)
+                            });
+                        break;
+                    case "tbl_users_in_chat":
+                        output.Add(new dynamic[] 
+                        {
+                            dataReader.GetValue(0), 
+                            dataReader.GetValue(1)
+                            
+                        });
+                        break;
+                    case "tbl_chats":
+                        output.Add(new dynamic[]
+                        {
+                            dataReader.GetValue(0),
+                            dataReader.GetValue(1),
+                            dataReader.GetValue(2)
+                        });
+                        break;
+                }
             }
-
+            command.Dispose();
             return output;
         }
-
-        public void AddData(string tableName, string columnsNames, string data)
+        
+        public void AddData(string tableName, string columnsNames, dynamic data)
         {
             if (!IsConnected) return;
-            SqlCommand command;
-            SqlDataAdapter adapter = new SqlDataAdapter();
+            MySqlCommand command;
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
             String sqlString = "";
 
             sqlString = $"INSERT INTO {tableName} ({columnsNames}) VALUES({data})";
 
-            command = new SqlCommand(sqlString, _cnn);
+            command = new MySqlCommand(sqlString, _cnn);
 
-            adapter.InsertCommand = new SqlCommand(sqlString, _cnn);
+            adapter.InsertCommand = new MySqlCommand(sqlString, _cnn);
             adapter.InsertCommand.ExecuteNonQuery();
             
             command.Dispose();
@@ -99,15 +136,15 @@ namespace DB_Connection
         public void UpdateData(string tableName, string updatingData, string id)
         {
             if (!IsConnected) throw new Exception();
-            SqlCommand command;
-            SqlDataAdapter adapter = new SqlDataAdapter();
+            MySqlCommand command;
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
             String sqlString = "";
 
             sqlString = $"UPDATE {tableName} set {updatingData} where id={id}";
             
-            command = new SqlCommand(sqlString, _cnn);
+            command = new MySqlCommand(sqlString, _cnn);
             
-            adapter.InsertCommand = new SqlCommand(sqlString, _cnn);
+            adapter.InsertCommand = new MySqlCommand(sqlString, _cnn);
             adapter.InsertCommand.ExecuteNonQuery();
             
             command.Dispose();
@@ -116,15 +153,15 @@ namespace DB_Connection
         public void DeleteData(string tableName, string id)
         {
             if (!IsConnected) throw new Exception();
-            SqlCommand command;
-            SqlDataAdapter adapter = new SqlDataAdapter();
+            MySqlCommand command;
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
             String sqlString = "";
 
-            sqlString = $"DELETE {tableName} WHERE id={id}";
+            sqlString = $"DELETE FROM {tableName} WHERE id={id}";
             
-            command = new SqlCommand(sqlString, _cnn);
+            command = new MySqlCommand(sqlString, _cnn);
             
-            adapter.InsertCommand = new SqlCommand(sqlString, _cnn);
+            adapter.InsertCommand = new MySqlCommand(sqlString, _cnn);
             adapter.InsertCommand.ExecuteNonQuery();
             
             command.Dispose();
