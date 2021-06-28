@@ -26,19 +26,19 @@ namespace DB_Connection
         private string Database { get; init; }
         
         private string Port { get; init; }
-        private string UserId { get; init; }
+        private string UserId { get; set; }
         private string Password { get; init; }
         
         public bool IsConnected { get; private set; }
 
-        public MySqlConnecting()
+        public MySqlConnecting( string server, string database, string port, string userId, string password)
         {
             // SqlConnectingAsync();
-            Server = "mysql60.hostland.ru";
-            Database = "host1323541_irkutsk5";
-            Port = "3306";
-            UserId = "host1323541_itstep";
-            Password = "269f43dc";
+            Server = server;
+            Database = database;
+            Port = port;
+            UserId = userId;
+            Password = password;
         }
 
         public void Connect()
@@ -59,20 +59,19 @@ namespace DB_Connection
             IsConnected = false;
         }
 
-        public List<dynamic> GetData(string tableName)
+        /*public IEnumerable<dynamic> GetAllData(string tableName)
         {
-            /*
-             * tbl_users
-             * tbl_chat_archive
-             * tbl_users_in_chat
-             * tbl_chats
-             */
+             // tbl_users
+             // tbl_chat_archive
+             // tbl_users_in_chat
+             // tbl_chats
+             
             if (!IsConnected) throw new Exception();
             MySqlCommand command;
             MySqlDataReader dataReader;
             var sqlString = "";
 
-            var output = new List<dynamic>() {};
+            var output = new List<Users>() {};
 
             sqlString = $"SELECT * FROM {tableName};";
             
@@ -80,18 +79,12 @@ namespace DB_Connection
             dataReader = command.ExecuteReader();
             while (dataReader.Read())
             {
+                var ex = new Users(Convert.ToInt32(dataReader[0]), Convert.ToString(dataReader[1]), (TypeRole)dataReader[2], (TypeStatus)dataReader[3]);
                 switch (tableName)
-                {
+                { 
                     case "tbl_users":
                     case "tbl_chat_archive":
-                       
-                            output.Add(new dynamic[]
-                            {
-                                dataReader.GetValue(0), 
-                                dataReader.GetValue(1), 
-                                dataReader.GetValue(2),
-                                dataReader.GetValue(3)
-                            });
+                        output.Add(ex);
                         break;
                     case "tbl_users_in_chat":
                         output.Add(new dynamic[] 
@@ -100,6 +93,7 @@ namespace DB_Connection
                             dataReader.GetValue(1)
                         });
                         break;
+                    
                     case "tbl_chats":
                         output.Add(new dynamic[]
                         {
@@ -113,7 +107,49 @@ namespace DB_Connection
             command.Dispose();
             return output;
         }
-        
+        */
+        public object GetData(string tableName, string columnsNames, string value)
+        {
+             // tbl_users
+             // tbl_chat_archive
+             // tbl_users_in_chat
+             // tbl_chats
+             
+            if (!IsConnected) throw new Exception();
+
+            var sqlString = $"SELECT * FROM {tableName} WHERE ({columnsNames})=({value});";
+            
+            var command = new MySqlCommand(sqlString, _cnn);
+            var dataReader = command.ExecuteReader();
+            while (dataReader.Read())
+            {
+                switch (tableName)
+                { 
+                    case "tbl_users":
+                        var outputUsers = new Users(Convert.ToInt32(dataReader[0]), Convert.ToString(dataReader[1]), (TypeRole)dataReader[2], (TypeStatus)dataReader[3]);
+                        command.Dispose();
+                        return outputUsers;
+
+                    case "tbl_chat_archive":
+                        var outputArchive = new ChatArchive(Convert.ToInt32(dataReader[0]), Convert.ToInt32(dataReader[1]), (DateTime)dataReader[2], Convert.ToString(dataReader[3]));
+                        command.Dispose();
+                        return outputArchive;
+                    
+                    case "tbl_users_in_chat":
+                        var outputInChat = new UsersInChat(Convert.ToInt32(dataReader[0]), Convert.ToInt32(dataReader[1]));
+                        command.Dispose();
+                        return outputInChat;
+                    
+                    case "tbl_chats":
+                        var outputChats = new ChatsList(Convert.ToInt32(dataReader[0]), Convert.ToString(dataReader[1]), Convert.ToBoolean(dataReader[2]));
+                        command.Dispose();
+                        return outputChats;
+                }
+            }
+            command.Dispose();
+            return 0;
+        }
+
         public void AddData(string tableName, string columnsNames, string data)
         {
             if (!IsConnected) return;
