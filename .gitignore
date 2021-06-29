@@ -352,6 +352,5 @@ MigrationBackup/
 # Rider
 .idea/
 
-# Custom
-TestApp/
-TestApp
+# 
+/DB_Connection/MySqlObjects/

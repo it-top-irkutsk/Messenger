@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DataModels\DataModels.csproj" />
+      <ProjectReference Include="..\DataModel\DataModel.csproj" />
+      <ProjectReference Include="..\DB_Connection\DB_Connection.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+        <HintPath>..\DB_Connection\MySqlObjects\BouncyCastle.Crypto.dll</HintPath>
+      </Reference>
+      <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604">
+        <HintPath>..\DB_Connection\MySqlObjects\Google.Protobuf.dll</HintPath>
+      </Reference>
+      <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d">
+        <HintPath>..\DB_Connection\MySqlObjects\K4os.Compression.LZ4.dll</HintPath>
+      </Reference>
+      <Reference Include="K4os.Compression.LZ4.Streams, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d">
+        <HintPath>..\DB_Connection\MySqlObjects\K4os.Compression.LZ4.Streams.dll</HintPath>
+      </Reference>
+      <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3">
+        <HintPath>..\DB_Connection\MySqlObjects\K4os.Hash.xxHash.dll</HintPath>
+      </Reference>
+      <Reference Include="MySql.Data, Version=8.0.25.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
+        <HintPath>..\DB_Connection\MySqlObjects\MySql.Data.dll</HintPath>
+      </Reference>
+      <Reference Include="MySql.Data.EntityFramework, Version=8.0.25.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
+        <HintPath>..\DB_Connection\MySqlObjects\MySql.Data.EntityFramework.dll</HintPath>
+      </Reference>
+      <Reference Include="MySql.Web, Version=8.0.25.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
+        <HintPath>..\DB_Connection\MySqlObjects\MySql.Web.dll</HintPath>
+      </Reference>
+      <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+        <HintPath>..\DB_Connection\MySqlObjects\System.Buffers.dll</HintPath>
+      </Reference>
+      <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <HintPath>..\DB_Connection\MySqlObjects\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      </Reference>
+      <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
+        <HintPath>..\DB_Connection\MySqlObjects\Ubiety.Dns.Core.dll</HintPath>
+      </Reference>
+      <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d">
+        <HintPath>..\DB_Connection\MySqlObjects\Zstandard.Net.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+      <PackageReference Include="System.Security.Permissions" Version="5.0.0" />
+    </ItemGroup>
+
+</Project>
