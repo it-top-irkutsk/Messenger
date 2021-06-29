@@ -125,22 +125,22 @@ namespace DB_Connection
             {
                 switch (tableName)
                 { 
-                    case "tbl_users":
+                    case "table_users":
                         var outputUsers = new Users(Convert.ToInt32(dataReader[0]), Convert.ToString(dataReader[1]), (TypeRole)dataReader[2], (TypeStatus)dataReader[3]);
                         command.Dispose();
                         return outputUsers;
 
-                    case "tbl_chat_archive":
+                    case "table_chat_archive":
                         var outputArchive = new ChatArchive(Convert.ToInt32(dataReader[0]), Convert.ToInt32(dataReader[1]), (DateTime)dataReader[2], Convert.ToString(dataReader[3]));
                         command.Dispose();
                         return outputArchive;
                     
-                    case "tbl_users_in_chat":
+                    case "table_users_in_chat":
                         var outputInChat = new UsersInChat(Convert.ToInt32(dataReader[0]), Convert.ToInt32(dataReader[1]));
                         command.Dispose();
                         return outputInChat;
                     
-                    case "tbl_chats":
+                    case "table_chats":
                         var outputChats = new ChatsList(Convert.ToInt32(dataReader[0]), Convert.ToString(dataReader[1]), Convert.ToBoolean(dataReader[2]));
                         command.Dispose();
                         return outputChats;
