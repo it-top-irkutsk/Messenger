@@ -113,11 +113,7 @@
                         <Button Content="Выйти из программы" Style="{StaticResource Super_button}" FontSize="22" Width="300" Click="Button_Click" />
                     </Border>
                 </StackPanel>
-
             </Grid>
-
-
         </Grid>
     </Border>
-
 </Window>
