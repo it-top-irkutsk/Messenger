@@ -24,5 +24,22 @@ namespace Messenger
         {
             InitializeComponent();
         }
+
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (Login_Box.Text=="Логин")
+            {
+                Login_Box.Text = "";
+            }         }
     }
 }

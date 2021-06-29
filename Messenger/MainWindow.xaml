@@ -5,9 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Messenger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800" WindowStyle="None">
+        Title="Войти в чат" Height="450" Width="800"
+        WindowStyle="None" 
+        ResizeMode="NoResize" 
+        Background="Transparent" 
+        AllowsTransparency="True">
     <Window.Resources>
-
         <Style x:Key="Super_button" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Background" Value="#272537"/>
@@ -39,37 +42,78 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <Grid>
-       
-       <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="270"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0" LastChildFill="False">
-            <ListBox DockPanel.Dock="Top" Width="Auto" SelectionMode="Single">
-               
-                <ListBoxItem Content="Пользователь 1" Height="64" Background="LightGray"></ListBoxItem>
-                <ListBoxItem Content="Пользователь 2" Height="64" />
-                <ListBoxItem Content="Пользователь 3" Height="64" Background="LightGray"></ListBoxItem>
-                <ListBoxItem Content="Пользователь 4" Height="64" />
-                <ListBoxItem Content="Пользователь 5" Height="64" Background="LightGray"></ListBoxItem>
+    <Border Background="#272537" CornerRadius="10" MouseLeftButtonDown="Border_MouseLeftButtonDown" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Rectangle StrokeThickness ="1" Grid.Row="1" Grid.Column="1" Fill="#FF1C163C" RadiusX="50" RadiusY="50" />
+            <TextBlock Text="Чат Болтанка приветствует вас!" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="22" Margin="0,0,0,0"/>
+            <Image Grid.Column="1" HorizontalAlignment="Left" Height="332" Margin="353,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="326" Source="/login.png"/>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
+                    <TextBlock Text="Идентифицируйте себя!" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="20,20,0,0"/>
+                    <TextBlock Text="Ваш логин" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
 
-                <ListBoxItem Content="Общий чат" Height="64" Background="LightGray"></ListBoxItem>
-                <ListBoxItem Content="Чат 1" Height="64"></ListBoxItem>
-                <ListBoxItem Content="Чат 2" Height="64" Background="LightGray"></ListBoxItem>
-                <ListBoxItem Content="Чат 3" Height="64"></ListBoxItem>
-                <ListBoxItem Content="Чат 4" Height="64" Background="LightGray"></ListBoxItem>
-            </ListBox>
+                    <TextBox x:Name="Login_Box" Grid.Column="1" Background="#272537" Foreground="White" Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Margin="0,5,0,0" Text="Логин" TextWrapping="NoWrap" Width="309" GotFocus="TextBox_GotFocus"/>
+                    <TextBlock Text="Пароль"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="22" Margin="0,20,0,0"/>
+                    <PasswordBox Grid.Column="1" Background="#272537" Foreground="White" Grid.Row="1" HorizontalAlignment="Center" FontSize="22" Margin="0,5,0,0" Password="" Width="309"/>
 
-        </DockPanel>
-        <DockPanel Grid.Column="2" LastChildFill="True">
-            <ListBoxItem Height="54" DockPanel.Dock="Top" Content="Чат такой-то"/>
-            <TextBox DockPanel.Dock="Bottom" Text="TextBox" TextWrapping="Wrap" Width="Auto" Height="111"/>
-            <TextBlock DockPanel.Dock="Top" Text="TextBlock" TextWrapping="Wrap" Width="Auto"/>
-        
-        </DockPanel>
-    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Border Grid.Row="0" Width="140" HorizontalAlignment="Center" Margin="10,10,10,10" CornerRadius="10" BorderThickness="1" Background="Black">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderBrush" Value="#FF20489E"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="White"/>
+                                        </Trigger>
 
-    
-
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Button Content="Войти" Style="{StaticResource Super_button}" FontSize="22" Width="140" />
+                        </Border>
+                        <Border Grid.Row="0" Width="140" HorizontalAlignment="Center" Margin="10,10,10,10" CornerRadius="10" BorderThickness="1" Background="Black">
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="BorderBrush" Value="#FF20489E"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="BorderBrush" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Button Content="Регистрация" Style="{StaticResource Super_button}" FontSize="22" Width="140"/>
+                        </Border>
+                    </StackPanel>
+                    <Border Grid.Row="0" Width="300" HorizontalAlignment="Center" CornerRadius="10" BorderThickness="1" Background="Black">
+                        <Border.Style>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="BorderBrush" Value="#FF20489E"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" Value="White"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        <Button Content="Выйти из программы" Style="{StaticResource Super_button}" FontSize="22" Width="300" Click="Button_Click" />
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>
