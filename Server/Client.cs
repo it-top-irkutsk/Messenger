@@ -35,7 +35,10 @@ namespace Server
                     string message = GetMessage();
                     login = JsonSerializer.Deserialize<Authorization>(message);
                     validation.Validation = Login(login);
-                    log.Warning($"Неверный пароль или логин при Авторизации Логин:{login.Login} Пароль:{login.Password}");
+                    if (validation.Validation == false)
+                    {
+                        log.Warning($"Неверный пароль или логин при Авторизации Логин:{login.Login} Пароль:{login.Password}");
+                    }
                     SendMessage(JsonSerializer.Serialize(validation));
                 } while (!validation.Validation);
                 Console.WriteLine($"К серверу подключился пользователь - {login.Login}");
@@ -60,24 +63,40 @@ namespace Server
         {
             while (true)
             {
-                string textJSON = GetMessage();
-                Msg message = JsonSerializer.Deserialize<Msg>(textJSON);
-                string textExport;
-                switch (message.Type)
+                try
                 {
-                    case TypesMsg.Connection:
-                        
-                        break;
-                    case TypesMsg.Disconnection:
-                        Disconnection(message);
-                        break;
-                    case TypesMsg.Text:
-                        Message(message);
-                        break;
-                    default:
-                        Console.WriteLine($"Пользователь {login.Login} отправил не тот тип сообщения");
-                        log.Info($"Пользователь {login.Login} отправил не тот тип сообщения");
-                        break;
+                    string textJSON = GetMessage();
+                    Msg message = JsonSerializer.Deserialize<Msg>(textJSON);
+                    string textExport;
+                    if (message != null)
+                    {
+                        switch (message.Type)
+                        {
+                            case TypesMsg.Connection:
+
+                                break;
+                            case TypesMsg.Disconnection:
+                                Disconnection(message);
+                                break;
+                            case TypesMsg.Text:
+                                Message(message);
+                                break;
+                            default:
+                                Console.WriteLine($"Пользователь {login.Login} отправил не тот тип сообщения");
+                                log.Info($"Пользователь {login.Login} отправил не тот тип сообщения");
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Message пустой пришол от пользователя {login.Login}");
+                        log.Info($"Message пустой пришол от пользователя {login.Login}");
+                    }
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine($"Ошибка принятого сообщения {e.Message} от пользователя {login.Login}");
+                    log.Warning($"Ошибка принятого сообщения {e.Message} от пользователя {login.Login}");
                 }
             }
         }
