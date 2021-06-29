@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Message_Types", "Message_Ty
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI_Styles", "UI_Styles\UI_Styles.csproj", "{14DF78D4-9930-4DB3-BD0A-BCFEDE45E0E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{E08B3D67-A182-440E-9B9B-2842C1B3A8E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{14DF78D4-9930-4DB3-BD0A-BCFEDE45E0E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14DF78D4-9930-4DB3-BD0A-BCFEDE45E0E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14DF78D4-9930-4DB3-BD0A-BCFEDE45E0E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E08B3D67-A182-440E-9B9B-2842C1B3A8E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E08B3D67-A182-440E-9B9B-2842C1B3A8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E08B3D67-A182-440E-9B9B-2842C1B3A8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E08B3D67-A182-440E-9B9B-2842C1B3A8E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
