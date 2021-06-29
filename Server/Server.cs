@@ -48,20 +48,6 @@ namespace Server
                 }
             }
         }
-        protected internal void BroadcastMessageToRoom(string message,int idChat)
-        {
-            {
-                byte[] data = Encoding.Unicode.GetBytes(message);
-                for (int i = 0; i < clients.Count; i++)
-                {
-                    if (clients[i].idChat != idChat)
-                    {
-                        clients[i].Stream.Write(data, 0, data.Length); //передача данных клиентам
-                    }
-                    
-                }
-            }
-        }
         protected internal void AddConnection(Client clientObject) // добавление нового подключения к Листу
         {
             clients.Add(clientObject);

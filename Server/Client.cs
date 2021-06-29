@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
@@ -11,15 +10,15 @@ namespace Server
 {
     public class Client
     {
+        private Logger.Logger log;
+        Authorization login;
         protected internal string Id { get; private set; }
         protected internal NetworkStream Stream {get; private set;}
-        public int idChat;
         private TcpClient client;
         private Server server;
 
         public Client(TcpClient tcpClient, Server netServer)
         {
-            idChat = '1';
             Id = Guid.NewGuid().ToString();
             client = tcpClient;
             server = netServer;
@@ -31,15 +30,16 @@ namespace Server
             try
             {
                 Stream = client.GetStream();
-                Authorization login;
                 do
                 {
                     string message = GetMessage();
                     login = JsonSerializer.Deserialize<Authorization>(message);
                     validation.Validation = Login(login);
+                    log.Warning($"Неверный пароль или логин при Авторизации Логин:{login.Login} Пароль:{login.Password}");
                     SendMessage(JsonSerializer.Serialize(validation));
                 } while (!validation.Validation);
                 Console.WriteLine($"К серверу подключился пользователь - {login.Login}");
+                log.Info($"К серверу подключился пользователь - {login.Login}");
 
                 Thread receiveThread = new Thread(new ThreadStart(() => ServerChat()));
                 receiveThread.Start(); //старт потока
@@ -69,15 +69,14 @@ namespace Server
                         
                         break;
                     case TypesMsg.Disconnection:
-                        textExport = JsonSerializer.Serialize(message); //отправка остальным что пользователь отключился
-                        server.BroadcastMessage(textExport);
-                        server.RemoveConnection(Id); //удаление соединения с пользователем
+                        Disconnection(message);
                         break;
                     case TypesMsg.Text:
-                        textExport = JsonSerializer.Serialize(message);
-                        server.BroadcastMessage(textExport);
+                        Message(message);
                         break;
                     default:
+                        Console.WriteLine($"Пользователь {login.Login} отправил не тот тип сообщения");
+                        log.Info($"Пользователь {login.Login} отправил не тот тип сообщения");
                         break;
                 }
             }
@@ -88,6 +87,21 @@ namespace Server
             var login = Login.Login;
             var pass = Login.Password; //Todo написать проверку логина и пароля
             return true;
+        }
+
+        private void Disconnection(Msg message)
+        {
+            string textExport = JsonSerializer.Serialize(message); //отправка остальным что пользователь отключился
+            server.BroadcastMessage(textExport);
+            log.Info($"От сервера Отключился пользователь - {login.Login}");
+            server.RemoveConnection(Id); //удаление соединения с пользователем
+        }
+
+        private void Message(Msg message)
+        {
+            string textExport = JsonSerializer.Serialize(message);
+            server.BroadcastMessage(textExport);
+            log.Info($"Пользователь отправил сообщение - {login.Login} Текст:{message.Message}");
         }
         private string GetMessage()
         {
@@ -106,6 +120,7 @@ namespace Server
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                log.Warning($"Ошибка при приеме сообщения :{e.Message}");
                 throw new Exception(e.Message);
             }
         }
