@@ -354,3 +354,4 @@ MigrationBackup/
 
 # 
 /DB_Connection/MySqlObjects/
+/StartUp/StartUp.csproj
