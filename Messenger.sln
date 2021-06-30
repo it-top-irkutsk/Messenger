@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StartUp", "StartUp\StartUp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataModel", "DataModel\DataModel.csproj", "{9C9056BD-4311-4D88-BD9B-F3A9C988A3D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{D7CC0924-B3A3-45DD-A6D4-A0CE0DE92334}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerApp", "Server\ServerApp.csproj", "{D7CC0924-B3A3-45DD-A6D4-A0CE0DE92334}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{E6FC4611-D439-4428-BBF2-3CC7D85D009D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientApp", "Client\ClientApp.csproj", "{E6FC4611-D439-4428-BBF2-3CC7D85D009D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageModel", "MessageModel\MessageModel.csproj", "{B7A70A0E-ECFA-456B-B3B4-5BC6C7BDF4CF}"
 EndProject
