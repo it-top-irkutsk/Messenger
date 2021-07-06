@@ -7,15 +7,13 @@ namespace Server
     class Program
     {
         static Server server; // сервер
-        static Thread listenThread; // потока для прослушивания
-        
+
         static void Main(string[] args)
         {
             try
             {
                 server = new Server();
-                listenThread = new Thread(new ThreadStart(server.Listen));
-                listenThread.Start(); //старт потока
+                server.Listen();
             }
             catch (Exception ex)
             {

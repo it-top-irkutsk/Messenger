@@ -44,7 +44,10 @@ namespace Server
                 byte[] data = Encoding.Unicode.GetBytes(message);
                 for (int i = 0; i < clients.Count; i++)
                 {
-                    clients[i].Stream.Write(data, 0, data.Length); //передача данных всем клиентам
+                    if (clients[i].login.Validation)
+                    {
+                        clients[i].Stream.Write(data, 0, data.Length); //передача данных всем клиентам
+                    }
                 }
             }
         }

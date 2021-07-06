@@ -11,7 +11,7 @@ namespace Server
     public class Client
     {
         private Logger.Logger log;
-        Authorization login;
+        public Authorization login;
         protected internal string Id { get; private set; }
         protected internal NetworkStream Stream {get; private set;}
         private TcpClient client;
@@ -44,8 +44,7 @@ namespace Server
                 Console.WriteLine($"К серверу подключился пользователь - {login.Login}");
                 log.Info($"К серверу подключился пользователь - {login.Login}");
 
-                Thread receiveThread = new Thread(new ThreadStart(() => ServerChat()));
-                receiveThread.Start(); //старт потока
+                ServerChat();
             }
             catch(Exception e)
             {
@@ -67,7 +66,6 @@ namespace Server
                 {
                     string textJSON = GetMessage();
                     Msg message = JsonSerializer.Deserialize<Msg>(textJSON);
-                    string textExport;
                     if (message != null)
                     {
                         switch (message.Type)
@@ -110,6 +108,7 @@ namespace Server
 
         private void Disconnection(Msg message)
         {
+            login.Validation = false;
             string textExport = JsonSerializer.Serialize(message); //отправка остальным что пользователь отключился
             server.BroadcastMessage(textExport);
             log.Info($"От сервера Отключился пользователь - {login.Login}");
