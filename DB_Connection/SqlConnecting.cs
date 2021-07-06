@@ -4,16 +4,13 @@
  + Inserting data to DB
  + Updating data in DB
  + Deleting data from DB   
- TODO Filter data
+ + Filter data
 */
 
 using System;
-using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using System.IO;
-using System.Text.Json;
-using System.Threading.Tasks;
 using DataModel;
+
 
 namespace DB_Connection
 {
@@ -26,19 +23,19 @@ namespace DB_Connection
         private string Database { get; init; }
         
         private string Port { get; init; }
-        private string UserId { get; set; }
+        private string UserId { get; init; }
         private string Password { get; init; }
         
         public bool IsConnected { get; private set; }
 
-        public MySqlConnecting( string server, string database, string port, string userId, string password)
+        public MySqlConnecting()
         {
-            // SqlConnectingAsync();
-            Server = server;
-            Database = database;
-            Port = port;
-            UserId = userId;
-            Password = password;
+            var jsonData = new JsonWork().GetJson();
+            Server = jsonData.Server;
+            Database = jsonData.Database;
+            Port = jsonData.Port;
+            UserId = jsonData.UserId;
+            Password = jsonData.Password;
         }
 
         public void Connect()

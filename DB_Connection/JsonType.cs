@@ -1,11 +1,9 @@
-using System;
 using System.IO;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace DB_Connection
 {
-    class JsonType
+    public class JsonType
     {
         public string Server { get; set; }
         public string Database { get; set; }
@@ -14,15 +12,14 @@ namespace DB_Connection
         public string Password { get; set; }
     }
 
-    class Program
+    public class JsonWork
     {
-        static async Task GetJson()
+        public JsonType GetJson()
         {
-            using (FileStream fs = new FileStream("config.json", FileMode.OpenOrCreate))
-            {
-                JsonType restoredJsonType = await JsonSerializer.DeserializeAsync<JsonType>(fs);
-                Console.WriteLine($"Name: {restoredJsonType.Server}  Age: {restoredJsonType.Database}");
-            }
+            var filename = "config.json";
+            var jsonstring = File.ReadAllText(filename);
+            var jsonCast = JsonSerializer.Deserialize<JsonType>(jsonstring);
+            return jsonCast;
         }
     }
 }

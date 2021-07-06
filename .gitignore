@@ -354,3 +354,5 @@ MigrationBackup/
 
 # 
 /DB_Connection/MySqlObjects/
+/TestApp/TestApp.csproj
+/TestApp/Program.cs
