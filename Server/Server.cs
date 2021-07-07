@@ -24,7 +24,7 @@ namespace ServerApp
                 Listening = true;
                 foreach (ServerClient client in clients)
                 {
-                    client.Start();
+                    client.StartListening();
                 }
                 tcpListener.Start();
                 Task taskServer = Task.Run(() => ListenForClients());
@@ -61,7 +61,7 @@ namespace ServerApp
         }
         public void StartClient(ServerClient client)
         {
-            client.Start();
+            client.StartListening();
         }
         public ServerClient GetClientAt(int index)
         {
@@ -101,7 +101,7 @@ namespace ServerApp
                 Listening = false;
                 foreach (ServerClient client in clients)
                 {
-                    client.Stop();
+                    client.StopListening();
                 }
                 tcpListener.Stop();
 

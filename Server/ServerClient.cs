@@ -16,7 +16,7 @@ namespace ServerApp
         {
             try
             {
-                Stop();
+                StopListening();
                 networkStream?.Close();
                 tcpClient?.Close();
                 if (server.clients.Contains(this)) server.CloseClient(this);

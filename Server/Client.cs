@@ -46,7 +46,7 @@ namespace ServerApp
                 Console.WriteLine("Error in Client.Connect(): {0}", ex);
             }
         }
-        public void Start()
+        public void StartListening()
         {
             try
             {
@@ -107,7 +107,7 @@ namespace ServerApp
                 Console.WriteLine("Error in Client.SendMessage(): {0}", ex);
             }
         }
-        public void Stop()
+        public void StopListening()
         {
             try
             {
@@ -122,7 +122,7 @@ namespace ServerApp
         {
             try
             {
-                Stop();
+                StopListening();
                 networkStream?.Close();
                 tcpClient?.Close();
                 Connected = false;

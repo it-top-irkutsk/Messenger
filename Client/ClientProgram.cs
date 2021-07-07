@@ -12,10 +12,10 @@ namespace ClientApp
             {
                 Client client = new();
                 client.Connect(new(IPAddress.Parse("127.0.0.1"), 8888));
-                client.Start();
+                client.StartListening();
                 for (int i = 0; i < 1000; i++)
                 {
-                    client.SendMessage("Клиент 1: " + i + i + i + "\n");
+                    client.SendMessage("Клиент 1: " + i + "\n");
                 }
                 //client.SendMessage();
                 Console.WriteLine("Нажмите Esc, чтобы остановить клиент.");
